@@ -2,6 +2,10 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
+import './App.css'
+import TodosList from '../TodosList/TodosList';
+import TodosListItem from '../TodosListItem/TodosListItem';
+
 class App extends Component {
 
     constructor(...args) {
@@ -32,14 +36,11 @@ class App extends Component {
     render() {
         const { todos } = this.state;
         return (
-            <ul>
+            <TodosList>
                 {_.map(todos, (todo, id) =>
-                    <li key={id} className={todo.completed ? 'completed' : ''}
-                        onClick={(e) => this.toggleTodo(id, e)}>
-                        {todo.description}
-                    </li>
+                    <TodosListItem key={id} todo={todo} handleClick={this.toggleTodo.bind(this)} />
                 )}
-            </ul>
+            </TodosList>
         );
     }
 }
