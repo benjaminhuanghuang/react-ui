@@ -26,7 +26,26 @@ class App extends Component {
         });
     }
 
-    toggleTodo(id, e) {
+    // handleClick={this.toggleTodo.bind(this)}
+    // toggleTodo(id, e) {
+    //     e.preventDefault();
+    //     const todos = _.clone(this.state.todos);
+    //     todos[id].completed = !todos[id].completed;
+    //     this.setState({ todos });
+    // }
+
+    // handleClick={this.toggleTodo} 
+    // toggleTodo = (id, e) => {
+    //     e.preventDefault();
+    //     const todos = _.clone(this.state.todos);
+    //     todos[id].completed = !todos[id].completed;
+    //     this.setState({ todos });
+    // }
+
+    // The first time our new toggleTodo gets called, we return a new function waiting to
+    // be called with e as the argument and the todo id stored in a closure.
+    // We need to update how we call our new method inside of TodosListItem
+     toggleTodo = (id) => (e) => {
         e.preventDefault();
         const todos = _.clone(this.state.todos);
         todos[id].completed = !todos[id].completed;
@@ -38,7 +57,7 @@ class App extends Component {
         return (
             <TodosList>
                 {_.map(todos, (todo, id) =>
-                    <TodosListItem key={id} todo={todo} handleClick={this.toggleTodo.bind(this)} />
+                    <TodosListItem key={id} todo={todo} handleClick={this.toggleTodo} />
                 )}
             </TodosList>
         );
